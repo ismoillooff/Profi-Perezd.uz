@@ -1,124 +1,275 @@
-Profi Pereezd — xizmatlarni sotish veb-sayti
+# Profi Pereezd
+
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs)
 ![React](https://img.shields.io/badge/React-19-149ECA?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)
-profipereezd.uz saytining qayta dizayni — Toshkentdagi ko‘chirish xizmatlari kompaniyasi uchun mijozlardan murojaat olish va ularni buyurtmaga aylantirishga yo‘naltirilgan, rus va o‘zbek tillarida ishlaydigan bir sahifali savdo sayti.
-Texnologiyalar: Next.js 16 · React 19 · Tailwind CSS v4 · GSAP + Lenis · TypeScript
----
-Tezkor ishga tushirish
+
+**Profi Pereezd** — Toshkentdagi ko‘chirish xizmatlari kompaniyasi uchun ishlab chiqilgan, rus va o‘zbek tillarida ishlaydigan bir sahifali savdo veb-sayt.
+
+Saytning asosiy vazifasi: foydalanuvchiga xizmatni tez tushuntirish, ishonch uyg‘otish, narxni aniqlash uchun kerakli ma’lumotlarni yig‘ish va murojaatni Telegram orqali kompaniya guruhiga yuborish.
+
+## Texnologiyalar
+
+| Yo‘nalish | Texnologiya |
+| --- | --- |
+| Framework | Next.js 16 |
+| UI | React 19 |
+| Til | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Animatsiya | GSAP, Lenis |
+| Lead qabul qilish | Next.js API Route + Telegram Bot API |
+| Sifat nazorati | ESLint, TypeScript, Playwright visual check |
+
+## Asosiy Imkoniyatlar
+
+- Rus va o‘zbek tillari uchun lokalizatsiya.
+- `/` manzilidan standart `/ru` sahifasiga yo‘naltirish.
+- Tezkor ariza qoldirish oynasi.
+- Narxni aniqlash uchun savollar asosidagi kalkulyator.
+- Telegram guruhiga avtomatik lead yuborish.
+- Telefon niqobi, forma validatsiyasi va spamga qarshi yashirin maydon.
+- `prefers-reduced-motion` sozlamasiga mos animatsiyalar.
+- SEO uchun sitemap, robots, metadata va structured data.
+- Mobil va desktop ekranlar uchun moslashuvchan dizayn.
+
+## Tezkor Ishga Tushirish
+
 ```bash
 npm install
-cp .env.example .env.local  # Telegram uchun ikkita o‘zgaruvchini kiriting
-npm run dev                 # http://localhost:3000 → /ru manziliga yo‘naltiradi
+cp .env.example .env.local
+npm run dev
 ```
-Buyruq	Vazifasi
-`npm run dev`	Dasturlash serverini ishga tushiradi (avval `public/images` qayta skanerlanadi).
-`npm run build`	Production uchun loyihani yig‘adi.
-`npm run start`	Yig‘ilgan production versiyasini ishga tushiradi.
-`npm run typecheck`	`tsc --noEmit` orqali TypeScript xatolarini tekshiradi.
-`npm run lint`	ESLint tekshiruvini ishga tushiradi.
-`npm run assets`	`public/images` papkasini qayta skanerlab, rasmlar xaritasini yangilaydi.
-`npm run visual-check`	8 ta ekran kengligida moslashuvchan dizayn va accessibility tekshiruvini bajaradi (server ishlab turishi kerak).
----
-Saytni production muhitiga chiqarishdan oldin
-1. Telegram orqali murojaatlarni yuborish
-Lokal muhitda sozlangan, production serverda ham sozlanishi shart.
-`.env.local` faylida `TELEGRAM_BOT_TOKEN` va `TELEGRAM_CHAT_ID` saqlanadi. Mijozlardan kelgan arizalar Telegram'dagi «Заявки» superguruhiga yuboriladi.
-`.env.local` Git tomonidan kuzatilmaydi (`.gitignore`ga kiritilgan). Shu sababli ushbu ikkita o‘zgaruvchini production hosting/server muhitida alohida sozlash kerak.
-Agar ular mavjud bo‘lmasa, `/api/lead` 503 javobini qaytaradi va forma foydalanuvchiga telefon qilish yoki Telegram orqali yozishni tavsiya qiladi. Bu ataylab shunday ishlaydi: murojaatning bildirmasdan yo‘qolib ketishidan ko‘ra, xatoni ochiq ko‘rsatish afzal.
-Yuborish vaqtida timeout yoki serverning `5xx` xatosi yuz bersa, tizim bir marta qayta urinadi. Ikkala urinish ham muvaffaqiyatsiz bo‘lsa, arizaning to‘liq ma’lumotlari — ism, telefon, izoh va kalkulyator xulosasi — qo‘lda tiklash imkoniyati uchun server jurnaliga yoziladi.
-> **Xavfsizlik:** Telegram tokenini hech qachon ommaviy GitHub repozitoriysiga joylamang. Server jurnallarida mijozlarning shaxsiy ma’lumotlari bo‘lishi mumkin; ularga kirishni cheklang va saqlash muddatini nazorat qiling.
-2. Fotosuratlar
-Hozircha rasmlar joylashadigan barcha bloklarda belgilangan vaqtinchalik ramkalar ko‘rinadi. Zarur suratlar ro‘yxati, o‘lchamlari va vizual yo‘nalishi IMAGE-BRIEF.md faylida keltirilgan.
-Rasmlarni aynan belgilangan nomlar bilan `public/images/` papkasiga qo‘ying — kodni o‘zgartirish talab qilinmaydi.
-Qo‘shimcha, majburiy bo‘lmagan materiallar `IMAGE-BRIEF.md` oxirida sanab o‘tilgan: SVG logotip, mijoz kompaniyalari logotiplari, real bajarilgan ishlar haqidagi ma’lumotlar, manzil, ish vaqti, WhatsApp raqami va narx koeffitsiyentlari.
----
-Mijozlardan ariza olishning ikki yo‘li
-Saytda foydalanuvchining qaror qabul qilish bosqichiga qarab ikkita alohida yo‘l mavjud. Ikkala yo‘l orqali yuborilgan arizalar ham bitta Telegram guruhiga keladi.
-Bosh ekran → «Оставить заявку» («Ariza qoldirish»). Ikki maydonli `LeadModal` oynasini ochadi. Bu xizmatga buyurtma berishga tayyor mijozlar uchun qisqa yo‘l. U `LeadForm` komponentining `compact` rejimidan foydalanadi, shu sababli ma’lumotlarni tekshirish, telefon niqobi, spamga qarshi yashirin maydon (honeypot) va yuborish muvaffaqiyatsiz bo‘lsa kiritilgan ma’lumotni saqlash mexanizmi umumiy kod orqali ishlaydi.
-Sayt sarlavhasidagi CTA va xizmatlar → «Рассчитать стоимость» («Narxni hisoblash»). To‘rtta savoldan iborat kalkulyatorga olib boradi. Bu hali tanlov qilayotgan foydalanuvchilar uchun mo‘ljallangan yo‘l.
----
-Loyiha tuzilmasi
+
+Lokal server:
+
+```text
+http://localhost:3000
+```
+
+Root sahifa avtomatik ravishda `/ru` manziliga yo‘naltiriladi.
+
+## Muhit O‘zgaruvchilari
+
+Lead yuborish ishlashi uchun `.env.local` faylida quyidagi qiymatlar bo‘lishi kerak:
+
+```env
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
+```
+
+`.env.local` Git tomonidan kuzatilmaydi. Production muhitida bu qiymatlarni hosting yoki server sozlamalariga alohida kiritish kerak.
+
+Agar Telegram sozlamalari mavjud bo‘lmasa, `/api/lead` `503` javob qaytaradi va foydalanuvchiga telefon yoki Telegram orqali bog‘lanish tavsiya qilinadi.
+
+## Buyruqlar
+
+| Buyruq | Vazifasi |
+| --- | --- |
+| `npm run dev` | Dasturlash serverini ishga tushiradi. Avval `public/images` papkasini skanerlaydi. |
+| `npm run build` | Production uchun loyihani yig‘adi. |
+| `npm run start` | Yig‘ilgan production versiyasini ishga tushiradi. |
+| `npm run lint` | ESLint tekshiruvini bajaradi. |
+| `npm run typecheck` | `tsc --noEmit` orqali TypeScript xatolarini tekshiradi. |
+| `npm run assets` | `public/images` papkasini skanerlab, rasmlar manifestini yangilaydi. |
+| `npm run visual-check` | 8 ta ekran kengligida responsive va accessibility tekshiruvlarini bajaradi. |
+
+## Loyiha Tuzilmasi
+
 ```text
 src/
   app/
-    [locale]/            layout · page · privacy · opengraph-image
-    api/lead/            Telegram orqali ariza yuborish
-    globals.css          Dizayn tizimining asosiy uslublari
-    robots.ts sitemap.ts not-found.tsx icon.svg
+    [locale]/            Asosiy sahifa, layout, privacy va OG image
+    api/lead/            Telegram orqali ariza yuborish endpointi
+    globals.css          Global uslublar va dizayn tokenlari
+    robots.ts            Robots sozlamalari
+    sitemap.ts           Sitemap generatsiyasi
+    not-found.tsx        404 sahifa
+    icon.svg             Sayt belgisi
+
   components/
-    sections/            Savdo sahifasining har bir bo‘limi alohida faylda
-    layout/              Header · MobileMenu · Footer · StickyContact · MobileActionBar
-    forms/               LeadForm
-    motion/              Reveal · RevealLines · SmoothScroll
-    media/ ui/ brand/ contact/ seo/
+    brand/               Logotip va brend elementlari
+    contact/             Aloqa kanallari
+    forms/               LeadForm va LeadModal
+    layout/              Header, Footer, mobil menyu va sticky CTA
+    media/               Rasm/figure komponentlari
+    motion/              Reveal, RevealLines va SmoothScroll
+    sections/            Landing sahifasining asosiy bloklari
+    seo/                 Structured data
+    ui/                  Qayta ishlatiladigan UI komponentlar
+
   content/
     company.ts           Kompaniya ma’lumotlarining yagona manbasi
-    ru.ts                Asosiy matnlar; Dictionary tipi shu fayldan olinadi
-    uz.ts                Dictionary tipiga mos tekshiriladigan o‘zbekcha tarjima
-    images.ts            Rasmlar manifesti
-    pricing.ts           Kalkulyator tariflari (to‘ldirilmaguncha o‘chirilgan)
+    ru.ts                Ruscha kontent va Dictionary tipi
+    uz.ts                O‘zbekcha tarjima
+    images.ts            Rasm sozlamalari
+    images.generated.ts  Avtomatik yaratiladigan rasm manifesti
+    pricing.ts           Kalkulyator tariflari
     privacy.ts           Maxfiylik siyosati
-  lib/                   Animatsiya parametrlari · analitika · telefon niqobi · scroll-lock
+
+  lib/
+    analytics.ts         Analitika hodisalari
+    motion.ts            Animatsiya sozlamalari
+    phone.ts             Telefon formatlash va validatsiya
+    scroll-lock.ts       Modal va menyu uchun scroll boshqaruvi
 ```
-Sayt matnlarini tahrirlash: `src/content/ru.ts` va `src/content/uz.ts` fayllarini o‘zgartiring. Foydalanuvchiga ko‘rinadigan matnlar komponentlarga bevosita yozilmagan. `uz.ts` faylida kalit yetishmasa yoki xato nomlansa, xatolik sayt ishlayotgan vaqtda `undefined` chiqishi o‘rniga build bosqichida aniqlanadi.
----
-Muhim arxitektura va dizayn qarorlari
-Quyidagi yechimlar standart sozlamalar emas, ongli ravishda tanlangan qarorlardir. Zarurat bo‘lsa, ularni o‘zgartirish mumkin.
-1. Saytdagi ma’lumotlar to‘qib chiqarilmagan
-Audit davomida 10 yillik tajriba, 2000 dan ortiq ko‘chirish, ikkita telefon raqami, Telegram foydalanuvchi nomi, elektron pochta manzili va sakkizta sharh (ism hamda sanalari bilan) amaldagi saytdan olingan. To‘rtta mijoz kompaniya nomi saytida logotipi ko‘rsatilgan yoki o‘z nomidan ommaviy sharh qoldirgan tashkilotlardan tanlangan.
-Saytda tasdiqlanmagan mukofotlar, sug‘urta kafolatlari, sertifikatlar, xodimlar soni yoki korporativ mijozlar haqidagi da’volar kiritilmagan. Sababi — ko‘chirish xizmatida ishonch asosiy omillardan biridir.
-2. Kalkulyator tasdiqlanmagan narxni ko‘rsatmaydi
-Kompaniya uchun ochiq e’lon qilingan tariflar mavjud emas. Kalkulyator foydalanuvchining ko‘chirishga oid talablarini yig‘ib, qayta qo‘ng‘iroq qilish uchun ariza qabul qiladi.
-Narxni taxminiy ko‘rsatib, keyin menejer boshqa summa aytishi mijoz ishonchiga zarar yetkazishi mumkin. `src/content/pricing.ts` fayliga haqiqiy tariflar kiritilgach, kalkulyator narx oralig‘ini ko‘rsatishni boshlaydi; boshqa joyni o‘zgartirish talab qilinmaydi.
-3. Bajarilgan ishlar haqidagi faktlar boshlang‘ich holatda bo‘sh
-`route`, `duration`, `team` va `vehicles` maydonlari faqat haqiqiy ma’lumot kiritilganida ko‘rsatiladi. «Bizning ishlarimiz» bo‘limida tasdiqlanmagan «4 soat · 3 mutaxassis» kabi ma’lumotlar chiqarilmaydi.
-4. Ko‘k rang o‘rniga iliq clay aksenti
-Dizayn talabi odatiy SaaS ko‘k rangidan foydalanishni cheklagan. Mavjud logotip asosan monoxrom bo‘lib, unda kichik ko‘k-binafsha gradient elementi bor.
-Shu sababli saytda iliq oqish fon, to‘q rangli matn va asosan CTA tugmalarida ishlatiladigan clay aksent tanlangan. Zarur bo‘lsa, `globals.css` ichidagi `--color-clay` o‘zgaruvchisini logotipning indigo rangiga moslab yangilash kifoya.
-5. WhatsApp tasdiqlanmaguncha o‘chirilgan
-Amaldagi saytda WhatsApp raqami ko‘rsatilmagan va u tasdiqlanmagan. `company.whatsapp.number` maydoniga haqiqiy raqam kiritilsa, WhatsApp havolasi bosh ekranda, kompyuter ekranidagi kontakt panelida, mobil menyuda, yakuniy CTA blokida va footer'da avtomatik chiqadi.
-Qiymat `null` bo‘lsa, ishlamaydigan havolalar ko‘rsatilmaydi.
-6. Ayrim bo‘limlar birlashtirilgan
-Muammo va yechim bo‘limi alohida «oldin/keyin» blokini o‘z ichiga oladi.
-Statistikalar va mijozlar logotiplari yagona ishonch bloki sifatida berilgan.
-Yakuniy chaqiriq (CTA) va aloqa formasi bitta ekranga birlashtirilgan.
-Bu takrorlanuvchi dalillarni va ortiqcha formalarni kamaytirish uchun qilingan.
-7. Kalkulyator ishonch bloklaridan oldin joylashgan
-Foydalanuvchi xizmat jarayoni bilan tanishib bo‘lgach, uning qiziqishi yuqori bo‘lishi mumkin. Shu sababli narxga oid savollar qo‘shimcha ishonch bloklaridan oldin beriladi — bu qiziqishni arizaga aylantirishga yordam beradi.
----
-Analitika
-Kod ichiga hech qanday pixel, konteyner yoki o‘lchov identifikatori qattiq yozilmagan.
-`src/lib/analytics.ts` hodisalarni `window.dataLayer`ga uzatadi, mavjud bo‘lsa `gtag` va `fbq`ga ham yuboradi. Shuningdek, CRM skriptlari uchun `profipereezd:lead` nomli DOM hodisasini yaratadi.
-Keyinchalik GTM, GA4 yoki Meta Pixel qo‘shilsa, asosiy CTA hodisalarini kuzatish mexanizmi tayyor.
-Hodisalar:
-`hero_form` · `price_calculator` · `service_cta` · `final_cta` · `phone_click` · `telegram_click` · `whatsapp_click` · `sticky_mobile_cta`
----
-Foydalanish qulayligi va animatsiyalar
-Saytda semantik HTML tuzilmasi, bitta `<h1>` sarlavha, belgilangan forma maydonlari, ko‘rinadigan klaviatura fokus indikatorlari, harakatlar uchun haqiqiy tugmalar, navigatsiya uchun havolalar va asosiy kontentga o‘tish havolasi (skip link) mavjud.
-Mobil menyuda klaviatura fokusi menyu chegarasida ushlab turiladi; menyu yopilgach, fokus uni ochgan tugmaga qaytadi.
-Barcha animatsiyalar `prefers-reduced-motion` sozlamasiga moslashadi. Kontent dastlab ko‘rinadigan holatda bo‘ladi; JavaScript animatsiya kerakligini aniqlagandan keyingina tegishli elementlarga harakat qo‘llanadi. Shuning uchun animatsiyani cheklagan yoki JavaScript ishlamaydigan foydalanuvchi bo‘sh sahifaga duch kelmaydi.
-Animatsiya cheklanganda Lenis orqali silliq skroll butunlay o‘chadi. Saytda majburiy scroll boshqaruvi (scroll hijacking) yoki skroll vaqtida qotirib qo‘yiladigan (pinned) bo‘limlar yo‘q.
-`npm run visual-check` quyidagi ekran kengliklarida tekshiruv o‘tkazadi:
-`375` · `390` · `430` · `768` · `1024` · `1280` · `1440` · `1920` px
-Tekshiriladigan jihatlar: gorizontal chiqib ketish (overflow), `<h1>` soni, yetishmayotgan `alt` atributlari, WCAG 2.5.8 bo‘yicha bosiladigan elementlar o‘lchami, brauzer konsolidagi xatolar hamda bajarilmagan tarmoq so‘rovlari.
----
-Eski WordPress saytidan ko‘chirish
-Avvalgi sayt WordPress + Elementor, Contact Form 7 va Site Reviews plaginlariga asoslangan. Yangi sayt oldingi kodni ishlatmaydi — loyiha yangidan yozilgan.
-DNS'ni yangi serverga o‘tkazishdan oldingi vazifalar:
-Qidiruv tizimlarida indekslangan eski URL manzillari uchun mos yo‘naltirishlarni sozlang. Yoast sitemap'ida `/`, `/thank-you/`, `/privacy/` va `/review/` ko‘rsatilgan; ularning har biri uchun mos yangi manzilni tekshiring.
-`/privacy/` manzilini `/ru/privacy`ga yo‘naltiring.
-Keshda qolgan formalar orqali eski arizalar kelishi ehtimoli sababli Contact Form 7 pochta qutisini yana bir necha hafta faol saqlang.
-Yangi `/sitemap.xml` faylini Google Search Console'da tekshiring.
----
-Ishlab chiquvchilar
-Ushbu loyiha MyWeb va Nyrosoft tomonidan ishlab chiqilgan.
-Loyihani o‘rnatish, sozlash, ishga tushirish yoki undan foydalanishda savollar, texnik muammolar yoxud tushunmovchiliklar yuzaga kelsa, dasturchi bilan bevosita bog‘laning.
-Aloqa turi	Ma’lumot
-Dasturchi	Hayotbek Ismoilov
-Telefon / WhatsApp	+998 95 005 15 45
-Telegram	@ismoillooff
-Instagram	@ismoillooff
----
+
+## Kontentni Tahrirlash
+
+Saytdagi foydalanuvchiga ko‘rinadigan matnlar asosan `src/content` papkasida saqlanadi.
+
+| Fayl | Nima uchun |
+| --- | --- |
+| `src/content/ru.ts` | Ruscha asosiy matnlar |
+| `src/content/uz.ts` | O‘zbekcha tarjima |
+| `src/content/company.ts` | Telefon, email, ijtimoiy tarmoqlar, tajriba va kompaniya ma’lumotlari |
+| `src/content/pricing.ts` | Kalkulyator tariflari |
+| `src/content/privacy.ts` | Maxfiylik siyosati matni |
+
+`uz.ts` ruscha dictionary tipiga mos tekshiriladi. Agar kalit yetishmasa yoki noto‘g‘ri yozilsa, xato runtime’da `undefined` bo‘lib chiqishidan oldin build bosqichida aniqlanadi.
+
+## Rasmlar
+
+Rasmlar `public/images/` papkasida saqlanadi.
+
+Yangi rasm qo‘shilgandan keyin manifestni yangilash uchun:
+
+```bash
+npm run assets
+```
+
+Hozircha `public/images/` papkasi bo‘sh bo‘lsa, sahifadagi rasm bloklarida vaqtinchalik placeholder ko‘rinadi. Kerakli fayllar belgilangan nomlar bilan qo‘shilganda kodni o‘zgartirish shart emas.
+
+## Ariza Qabul Qilish Yo‘llari
+
+Saytda foydalanuvchidan murojaat olishning ikkita asosiy yo‘li bor:
+
+1. **Tezkor ariza:** bosh ekrandagi `Оставить заявку` tugmasi `LeadModal` oynasini ochadi.
+2. **Narx kalkulyatori:** `Рассчитать стоимость` tugmasi foydalanuvchini savollar asosidagi kalkulyatorga olib boradi.
+
+Ikkala yo‘l ham `LeadForm` logikasidan foydalanadi va muvaffaqiyatli yuborilgan arizalar bitta Telegram guruhiga keladi.
+
+## Kalkulyator
+
+Kalkulyator hozircha aniq narx chiqarmaydi, chunki kompaniyaning tasdiqlangan tariflari loyihaga kiritilmagan.
+
+`src/content/pricing.ts` faylidagi `RATES` qiymati `null` bo‘lganda kalkulyator foydalanuvchidan ko‘chirish bo‘yicha ma’lumotlarni yig‘adi va qayta aloqa uchun ariza qabul qiladi.
+
+Haqiqiy tariflar kiritilgandan keyin kalkulyator avtomatik ravishda taxminiy narx oralig‘ini ko‘rsata boshlaydi.
+
+## Analitika
+
+`src/lib/analytics.ts` foydalanuvchi harakatlarini quyidagi kanallarga yuborishga tayyor:
+
+- `window.dataLayer`
+- `gtag`
+- `fbq`
+- `profipereezd:lead` DOM hodisasi
+
+Kuzatiladigan asosiy hodisalar:
+
+```text
+hero_form
+price_calculator
+service_cta
+final_cta
+phone_click
+telegram_click
+whatsapp_click
+sticky_mobile_cta
+```
+
+Kod ichida GTM, GA4 yoki Meta Pixel identifikatorlari qattiq yozilmagan. Ular keyinchalik alohida qo‘shilishi mumkin.
+
+## Accessibility Va Animatsiyalar
+
+Saytda quyidagi talablar hisobga olingan:
+
+- semantik HTML tuzilmasi;
+- bitta asosiy `<h1>`;
+- forma maydonlari uchun label va validatsiya;
+- klaviatura bilan ko‘rinadigan focus holatlari;
+- mobil menyuda focus trap;
+- skip link;
+- `prefers-reduced-motion` qo‘llab-quvvatlashi;
+- animatsiya o‘chirilganda kontentning ko‘rinib turishi.
+
+Lenis orqali silliq skroll faqat foydalanuvchi harakatni cheklamagan holatda ishlaydi. Saytda majburiy scroll hijacking yoki pinned bo‘limlar yo‘q.
+
+## Visual Check
+
+Responsive va accessibility tekshiruvlari quyidagi ekran kengliklarida bajariladi:
+
+```text
+375 · 390 · 430 · 768 · 1024 · 1280 · 1440 · 1920 px
+```
+
+Tekshiriladigan jihatlar:
+
+- gorizontal overflow;
+- `<h1>` soni;
+- rasm `alt` atributlari;
+- bosiladigan elementlar o‘lchami;
+- brauzer konsolidagi xatolar;
+- bajarilmagan tarmoq so‘rovlari.
+
+Ishga tushirish:
+
+```bash
+npm run dev
+npm run visual-check
+```
+
+## Production Checklist
+
+Production’ga chiqarishdan oldin quyidagilarni tekshirish kerak:
+
+- `TELEGRAM_BOT_TOKEN` va `TELEGRAM_CHAT_ID` production muhitida sozlangan.
+- `.env.local` yoki boshqa maxfiy fayllar GitHub’ga chiqmagan.
+- Kerakli real rasmlar `public/images/` papkasiga qo‘yilgan.
+- `npm run assets` bajarilgan.
+- `npm run typecheck` muvaffaqiyatli tugagan.
+- `npm run lint` muvaffaqiyatli tugagan.
+- `npm run build` muvaffaqiyatli tugagan.
+- Yangi `/sitemap.xml` Google Search Console’da tekshirilgan.
+- Eski WordPress URL manzillari uchun redirectlar sozlangan.
+
+## Eski Saytdan Ko‘chirish Eslatmalari
+
+Avvalgi sayt WordPress, Elementor, Contact Form 7 va Site Reviews asosida ishlagan. Yangi loyiha eski koddan foydalanmaydi va Next.js asosida qayta yozilgan.
+
+DNS yangi serverga o‘tkazilishidan oldin:
+
+1. Eski indekslangan URL manzillar uchun redirectlarni tekshiring.
+2. `/privacy/` manzilini `/ru/privacy`ga yo‘naltiring.
+3. Contact Form 7 pochta qutisini bir necha hafta faol qoldiring.
+4. Yangi sitemap’ni Search Console’da tekshiring.
+
+## Git Ignore Qoidasi
+
+Repository’da Markdown fayllardan faqat `README.md` ko‘rinishi kerak.
+
+`.gitignore` ichida quyidagi qoida bor:
+
+```gitignore
+*.md
+!README.md
+!readme.md
+```
+
+Shu sababli texnik yoki ichki `.md` hujjatlar lokal papkada qolishi mumkin, lekin GitHub’ga chiqmaydi.
+
+## Ishlab Chiquvchilar
+
+Ushbu loyiha **MyWeb** va **Nyrosoft** tomonidan ishlab chiqilgan.
+
+| Aloqa turi | Ma’lumot |
+| --- | --- |
+| Dasturchi | Hayotbek Ismoilov |
+| Telefon / WhatsApp | +998 95 005 15 45 |
+| Telegram | @ismoillooff |
+| Instagram | @ismoillooff |
+
+## Huquqlar
+
 © MyWeb · Nyrosoft. Foydalanish va tarqatish shartlari loyiha egasi bilan kelishilgan huquqlarga muvofiq belgilanadi.
