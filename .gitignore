@@ -33,6 +33,11 @@ pnpm-debug.log*
 # Deployment
 .vercel/
 
+# Markdown docs
+*.md
+!README.md
+!readme.md
+
 # TypeScript
 next-env.d.ts
 *.tsbuildinfo
