@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Favicon. The wordmark is illegible at 16px, so the mark alone carries
+       it: the truck silhouette on the brand's clay, which stays readable in a
+       crowded tab strip where a white-on-white glyph would disappear. -->
+  <rect width="64" height="64" rx="14" fill="#c2521f"/>
+  <g stroke="#ffffff" stroke-width="4.2" fill="none" stroke-linejoin="round">
+    <path d="M11 18h24v18H11z"/>
+    <path d="M35 24h7l7 6.4V36H35z"/>
+  </g>
+  <circle cx="21" cy="42" r="4.6" stroke="#ffffff" stroke-width="4.2" fill="#c2521f"/>
+  <circle cx="43" cy="42" r="4.6" stroke="#ffffff" stroke-width="4.2" fill="#c2521f"/>
+</svg>

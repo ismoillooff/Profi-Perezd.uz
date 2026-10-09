@@ -1,0 +1,52 @@
+# Dependencies
+/node_modules/
+/.pnp
+.pnp.*
+
+# Next.js
+/.next/
+/out/
+
+# Production builds
+/build/
+/dist/
+
+# Testing and QA artifacts
+/coverage/
+/test-results/
+/playwright-report/
+/.visual/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env*.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# Deployment
+.vercel/
+
+# TypeScript
+next-env.d.ts
+*.tsbuildinfo
+
+# Caches
+.eslintcache
+.stylelintcache
+.turbo/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.pem
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
