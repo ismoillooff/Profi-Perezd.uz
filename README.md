@@ -121,5 +121,4 @@ Telefon / WhatsApp	+998 95 005 15 45
 Telegram	@ismoillooff
 Instagram	@ismoillooff
 ---
-© MyWeb · Nyrosoft. Foydalanish va tarqatish shartlari loyiha egasi bilan kelishilgan huquqlarga muvofiq belgilanadi.#   P r o f i - P e r e z d . u z  
- 
+© MyWeb · Nyrosoft. Foydalanish va tarqatish shartlari loyiha egasi bilan kelishilgan huquqlarga muvofiq belgilanadi.
